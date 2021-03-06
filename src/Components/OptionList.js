@@ -1,22 +1,21 @@
 import React from "react";
 import Option from "./Options";
 
-class optionList extends React.Component {
-  render() {
-    const data = this.props.infoCombo;
-    let visibleFlag = this.props.isVisible ? "active" : "";
-    const optionList = data.map((item,id) => (
-      <Option
-        key={item.id}
-        name={item.name}
-        isVisible={item.isVisible}
-        updateFilter={this.props.updateFilter}
-        tabIndex={id}
-      />
-    ));
+function optionList({ infoCombo, isVisible, updateFilter }) {
+  const data = infoCombo;
+  let visibleFlag = isVisible ? "active" : "";
+  const optionList = data.map((item, id) => (
+    <Option
+      key={item.id}
+      name={item.name}
+      isVisible={item.isVisible}
+      updateFilter={updateFilter}
+      tabIndex={-1}
+      role = 'button'
+    />
+  ));
 
-    return <div className={`optionContainer ${visibleFlag}`}>{optionList}</div>;
-  }
+  return <div className={`optionContainer ${visibleFlag}`}>{optionList}</div>;
 }
 
 export default optionList;

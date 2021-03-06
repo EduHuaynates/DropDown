@@ -13,10 +13,10 @@ class DropDownContainer extends React.Component {
     ],
 
     employees: [
-      { id: "1", name: "Edu", dni: "47202001" },
-      { id: "2", name: "Ash", dni: "47202002" },
-      { id: "3", name: "Lyn", dni: "47202003" },
-      { id: "4", name: "Gaturin", dni: "47202004" },
+      { id: "1", name: "EDU", dni: "47202001" , isVisible: true },
+      { id: "2", name: "ASH", dni: "47202002", isVisible: true },
+      { id: "3", name: "LYN", dni: "47202003", isVisible: true },
+      { id: "4", name: "GATURIN", dni: "47202004" , isVisible: true},
     ],
 
     departamento: [
@@ -25,15 +25,17 @@ class DropDownContainer extends React.Component {
       { idDpto: "c", name: "Pasco" },
     ],
   };
-}
 
-render(){
+  render(){
 
     return(
         <DropDown 
-        data = {employees} 
+        data = {this.state.employees} 
         />
     )
 }
 
-export default DropDown;
+  
+}
+
+export default DropDownContainer;

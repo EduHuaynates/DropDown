@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 
-// import styles from '../Styles/Option.module.css'
-
-//function Option(props) {
-function Option({ name, isVisible, updateFilter, tabIndex}) {
+function Option({ name, isVisible, updateFilter, tabIndex }) {
   const handleInputValue = (e) => {
     updateFilter(e.target.innerText);
     console.log(e.target.innerText);
