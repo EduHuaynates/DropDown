@@ -1,0 +1,33 @@
+.searchBox {
+  position: relative;
+  width: 100%;
+  display: flex;
+  margin-bottom: 2px;
+}
+
+.inputText {
+  border: 1px solid #b2b3b3;
+  border-radius: 0.3rem;
+  padding: 0.3rem 0.8rem;
+  outline: none;
+  width: 85%;
+  font-size: $base_Font_Size;
+  position: relative;
+}
+
+.inputText:focus{
+  border: 1px solid $color_Button_DropDown;
+}
+
+.list-button{  
+  width: 15%;
+  background-color: $color_Button_DropDown;
+  border: 1px solid $color_Button_DropDown;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+}
+
+.list-button img{
+  vertical-align: bottom;
+}
