@@ -1,35 +1,22 @@
-import React,{useRef} from "react";
+import React, { useEffect } from "react";
 
 // import styles from '../Styles/Option.module.css'
 
-class Option extends React.Component {
-  handleInputValue = (e) => {
-    this.props.updateFilter(e.target.innerText);
-    // this.props.updateInputValue(e.target.innerText);
+//function Option(props) {
+function Option({ name, isVisible, updateFilter, tabIndex}) {
+  const handleInputValue = (e) => {
+    updateFilter(e.target.innerText);
     console.log(e.target.innerText);
   };
 
-  handleKeyPress = (e) => {
-    if(e.keyCode == 38){
-      console.log( e.target);
-    }
-
-    // console.log(e.keyCode);
-  };
-
-  render() {
-    const isVisible = this.props.isVisible ? "option" : "optionInactive";
-    return (
-      <div
-        tabIndex={this.props.tabIndex} 
-        className={`${isVisible}`}
-        onClick={this.handleInputValue}
-        onKeyUp={this.handleKeyPress}
-      >
-        {this.props.name}
-      </div>
-    );
-  }
+  return (
+    <div
+      tabIndex={tabIndex}
+      className={isVisible ? "option" : "optionInactive"}
+      onClick={handleInputValue}
+    >
+      {name}
+    </div>
+  );
 }
-
 export default Option;
