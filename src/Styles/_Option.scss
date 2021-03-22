@@ -6,11 +6,20 @@
 
 .optionInactive{
   display: none;
+  padding: 0.3rem 0.8rem;
 }
 
 .option:hover {
+  background-color: $color_Hovered;
+  // color: #FFFFFF;
+  transition: all ease 0.3s;
+  cursor: pointer;
+}
+
+.optionFocused{
   background-color: $color_Button_DropDown;
   color: #FFFFFF;
-  transition: all ease 0.5s;
-  cursor: pointer;
+  transition: all ease 0.3s;
+  outline: none;
+  // cursor: pointer;
 }

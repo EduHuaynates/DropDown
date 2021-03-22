@@ -1,51 +1,74 @@
-import React , {useState} from "react";
+import React, { useState } from "react";
 import OptionList from "./OptionList";
 import SearchBox from "./SearchBox";
+import useRoveFocus from "../helpers/useRoveFocus";
 
+function DropDown({ data }) {
+  const [option, setOption] = useState(data);
+  const [isVisible, setIsVisible] = useState(false);
+  const [filter, setFilter] = useState("");
+  const [listLength, setListLength] = useState(option.length);
 
-function DropDown({data}) {
-  const [emp, setEmp] = useState( data )     
-  const [isVisible,setIsVisible] = useState(false)
-  const [filter,setFilter] = useState('')
-
+  const [focus, setFocus] = useRoveFocus(listLength);
   const updateList = (filter) => {
-    filter = filter.toUpperCase();
-    const newList = emp.map((obj , id) => {
+    let lista = -1;
+    const newList = option.map((obj, id) => {
       const label = obj.name;
-      // console.log(obj ,id)
       if (label.indexOf(filter) != -1) {
-        return Object.assign({}, obj, { isVisible: true });
+        lista++;
+        return Object.assign({}, obj, { isVisible: true, focusOrder: lista });
       } else {
-        return Object.assign({}, obj, { isVisible: false });
+        return Object.assign({}, obj, { isVisible: false, focusOrder: "-1" });
       }
-    }
-    );
+    });
 
-    setEmp(newList );
+    setOption(newList);
     updateFilter(filter);
+    setListLength(lista + 1);
+  };
+
+  const updateFilterOnKeyPress = (param) => {
+    const focusedName = option.filter((opt) => {
+      return opt.focusOrder == focus;
+    });
+    updateFilter(focusedName[0].name);
+    if (param) {
+      toggleVisibleList();
+    }
   };
 
   const updateFilter = (newFilter) => {
     setFilter(newFilter);
   };
 
-  const toggleVisibleList = () => {
-    setIsVisible(!isVisible );
+  const toggleVisibleList = (flag) => {
+    if (flag) {
+      setIsVisible(flag);
+    } else {
+      setIsVisible(!isVisible);
+    }
   };
 
-  return (<div className="dropDownWrapper">
-  <SearchBox
-    updateList={updateList}
-    toggleVisibleList={toggleVisibleList}
-    inputValue={filter}
-  />
-  <OptionList
-    infoCombo={emp}
-    isVisible={isVisible}
-    updateFilter={updateFilter}
-  />
-</div>);
+  return (
+    <div className="dropDownWrapper">
+      <SearchBox
+        updateList={updateList}
+        toggleVisibleList={toggleVisibleList}
+        inputValue={filter}
+        setFocus={setFocus}
+        listLength={listLength}
+        updateFilterOnKeyPress={updateFilterOnKeyPress}
+        isVisible={isVisible}
+      />
+      <OptionList
+        infoCombo={option}
+        isVisible={isVisible}
+        updateFilter={updateFilter}
+        toggleVisibleList={toggleVisibleList}
+        optionFocus={focus}
+      />
+    </div>
+  );
 }
-
 
 export default DropDown;

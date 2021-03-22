@@ -1,21 +1,35 @@
 import React from "react";
 import Option from "./Options";
 
-function optionList({ infoCombo, isVisible, updateFilter }) {
-  const data = infoCombo;
+function OptionList({
+  infoCombo,
+  isVisible,
+  updateFilter,
+  toggleVisibleList,
+  optionFocus,
+}) {
+  // const [focus, setFocus] = useRoveFocus(listLength);
+
+  // const data = infoCombo;
   let visibleFlag = isVisible ? "active" : "";
-  const optionList = data.map((item, id) => (
+  // const optionListFiltered = data.filter( option => option.isVisible === true)
+  const optionList = infoCombo.map((item, index) => (
+    
     <Option
       key={item.id}
       name={item.name}
       isVisible={item.isVisible}
       updateFilter={updateFilter}
-      tabIndex={-1}
-      role = 'button'
+      index={item.focusOrder}
+      // focus={optionFocus === item.focusOrder}
+      // setFocus={setFocus}
+      toggleVisibleList={toggleVisibleList}
+      optionFocus={optionFocus}
+      // setFocusedValue={setFocusedValue}
     />
   ));
 
   return <div className={`optionContainer ${visibleFlag}`}>{optionList}</div>;
 }
 
-export default optionList;
+export default OptionList;

@@ -1,17 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
+import classNames from "classnames";
 
-function Option({ name, isVisible, updateFilter, tabIndex }) {
-  const handleInputValue = (e) => {
+function Option({
+  name,
+  isVisible,
+  updateFilter,
+  index,
+  toggleVisibleList,
+  optionFocus,
+}) {
+  const optionClass = classNames({
+    option: isVisible,
+    optionInactive: !isVisible,
+    optionFocused: isVisible & (index === optionFocus),
+  });
+
+  const handleSelect = (e) => {
+    toggleVisibleList();
     updateFilter(e.target.innerText);
-    console.log(e.target.innerText);
   };
-
   return (
-    <div
-      tabIndex={tabIndex}
-      className={isVisible ? "option" : "optionInactive"}
-      onClick={handleInputValue}
-    >
+    <div className={optionClass} onClick={handleSelect}>
       {name}
     </div>
   );
